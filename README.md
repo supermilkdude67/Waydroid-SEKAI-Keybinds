@@ -6,7 +6,7 @@ My little sister who plays Project SEKAI using Memu on Windows, apparently can't
 
 So, I made a simple Python script that uses `python-evdev` and `python-uinput` to translate key presses to multi-touch events.
 
-The default keybinds for tap notes are `Q, W, E, R, T, Y, I, O, P, Left Bracket, and Right Bracket`.
+The default keybinds for tap notes are `Q, W, E, R, T, Y, I, O, P, [, and ]`.
 <br>
 The default keybinds for flick notes are `X, C, Space, Comma, and Period`.
 <br>
@@ -14,6 +14,7 @@ The default keybinds for flick notes are `X, C, Space, Comma, and Period`.
 These keys are configured to tap corresponding parts of the highway on Project SEKAI. Reconfigure the coordinates and keybinds in the code as/if needed.
 
 So now, if for whatever reason, you're willingly playing Project SEKAI with a keyboard, you can now do it on Waydroid.
+<br>
 Because *someone* had to do it.
 
 # Instructions
@@ -29,7 +30,17 @@ Dependencies are:
 `python3`, `python-uinput`, `python-evdev`
 <br>
 <br>
-And just run the script with:
+Add your user to the `input` group:
+<br>
+`sudo usermod -aG input $USER`
+<br>
+`newgrp input`
+<br>
+<br>
+Then log out of your user, and log back in.
+<br>
+<br>
+Then just run the script with:
 <br>
 `python3 ./keybinds.py` (or replace "keybinds.py" with whatever you want to rename the file to)
 <br>
