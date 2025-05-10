@@ -15,6 +15,26 @@ These keys are configured to tap corresponding parts of the highway on Project S
 So now, if for whatever reason, you're willingly playing Project SEKAI with a keyboard, you can now do it on Waydroid.
 Because *someone* had to do it.
 
+# Instructions
+
+Minimum requirements are:
+<br>
+<br>
+Ubuntu 20.04+ with a machine powerful enough to run Project SEKAI on Waydroid, obviously.
+<br>
+<br>
+Dependencies are:
+<br>
+`python3`, `python-uinput`, `python-evdev`
+<br>
+<br>
+And just run the script with:
+<br>
+`python3 ./keybinds.py` (or replace "keybinds.py" with whatever you want to rename the file to)
+<br>
+<br>
+<br>
 (For the sake of saving yourself some frustration, *don't* attempt to pass any Append difficulty charts or complicated Master difficulty charts with this.)
+<br>
 <br>
 (You have been warned, you 13 fingered aliens.)
