@@ -1,6 +1,7 @@
 # Waydroid-SEKAI-Keybinds
 
 My little sister who plays Project SEKAI using Memu on Windows, apparently can't stand using <a href="https://github.com/H-M-H/Weylus">Weylus</a> to play the game on Waydroid.
+<br>
 (honestly neither can I sometimes with the low-end tablet I have, but I've still managed to get pretty far)
 
 So, I made a simple Python script that uses `python-evdev` and `python-uinput` to translate key presses to multi-touch events.
