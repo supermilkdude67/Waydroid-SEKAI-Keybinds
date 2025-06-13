@@ -1,6 +1,7 @@
 import time
 from evdev import UInput, AbsInfo, ecodes as e, InputDevice, categorize, KeyEvent, list_devices
 import select
+import threading
 
 # Tap note key mappings, feel free to change the keys and tap coordinates
 tap_keys = {
@@ -77,9 +78,11 @@ def perform_flick(slot, x, y):
     ui.write(e.EV_ABS, e.ABS_MT_POSITION_Y, y)
     ui.write(e.EV_KEY, e.BTN_TOUCH, 1)
     ui.syn()
-    time.sleep(0.005)
 
-    steps = 500 # Unoptimized piece of crap code here, but it was the only way for Project SEKAI to accept the virtual swipe as a flick.
+    # Basically, all I changed here was that it holds the tap for longer than before. (0.025 seconds as opposed to 0.005 seconds)
+    time.sleep(0.025)  # 0.025 seconds (25 ms) seems to work, feel free to change it if its not working or messing with your timing. 
+
+    steps = 500
     delta_x = 30
     delta_y = 500
 
@@ -119,7 +122,11 @@ while True:
                             continue
 
                         if code in flick_keys:
-                            perform_flick(slot, x, y)
+                            used_slots.add(slot)
+                            threading.Thread(target=perform_flick, args=(slot, x, y)).start() 
+                            # I updated this so that the delay before the flick note won't mess up other notes you may be hitting at the same time as the flick note. 
+                            # The `used_slots.add(slot)` reserves multi touch slots a little bit ahead of time so multiple flick notes can be hit in the same thread.
+
                         else:
                             # Tap begin
                             ui.write(e.EV_ABS, e.ABS_MT_SLOT, slot)
@@ -139,7 +146,7 @@ while True:
                         # Tap end
                         ui.write(e.EV_ABS, e.ABS_MT_SLOT, slot_id)
                         ui.write(e.EV_ABS, e.ABS_MT_TRACKING_ID, -1)
-                        ui.write(e.EV_KEY, e.BTN_TOUCH, 0)
+                        ui.write(e.EV_KEY, e.BTN_TOUCH, 0) 
                         ui.syn()
 
                         del pressed_keys[code]
